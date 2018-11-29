@@ -1,0 +1,44 @@
+Tue Nov 27 11:27:09 -02 2018
+k=10 min=10 exploredSolutions=1
+k=11 min=10 exploredSolutions=100000
+k=11 min=10 exploredSolutions=200000
+k=9 min=9 exploredSolutions=292040
+k=10 min=9 exploredSolutions=300000
+k=9 min=9 exploredSolutions=400000
+k=10 min=9 exploredSolutions=500000
+k=10 min=9 exploredSolutions=600000
+k=10 min=9 exploredSolutions=700000
+k=9 min=9 exploredSolutions=800000
+k=9 min=9 exploredSolutions=900000
+k=10 min=9 exploredSolutions=1000000
+k=10 min=9 exploredSolutions=1100000
+k=10 min=9 exploredSolutions=1200000
+k=10 min=9 exploredSolutions=1300000
+k=10 min=9 exploredSolutions=1400000
+k=10 min=9 exploredSolutions=1500000
+k=9 min=9 exploredSolutions=1600000
+k=10 min=9 exploredSolutions=1700000
+k=10 min=9 exploredSolutions=1800000
+k=9 min=9 exploredSolutions=1900000
+k=9 min=9 exploredSolutions=2000000
+k=10 min=9 exploredSolutions=2100000
+k=10 min=9 exploredSolutions=2200000
+k=10 min=9 exploredSolutions=2300000
+k=10 min=9 exploredSolutions=2400000
+k=10 min=9 exploredSolutions=2500000
+k=9 min=9 exploredSolutions=2600000
+k=9 min=9 exploredSolutions=2700000
+k=10 min=9 exploredSolutions=2800000
+k=9 min=9 exploredSolutions=2900000
+k=10 min=9 exploredSolutions=3000000
+k=10 min=9 exploredSolutions=3100000
+k=10 min=9 exploredSolutions=3200000
+k=10 min=9 exploredSolutions=3300000
+k=9 min=9 exploredSolutions=3400000
+k=9 min=9 exploredSolutions=3500000
+k=9 min=9 exploredSolutions=3600000
+k=8 min=8 exploredSolutions=3614475
+k=7 min=7 exploredSolutions=3617412
+sol=[2 3 4 5 6 7 1 7 1 2 3 4 5 6 5 6 7 1 2 3 4 3 4 5 6 7 1 2 1 2 3 4 5 6 7 6 7 1 2 3 4 5 4 5 6 7 1 2 3] min=7
+exploredSolutions=3617667
+backtrack took 9m1.728700528s

@@ -1,0 +1,7 @@
+c FILE: test1.col
+c SOURCE: Eric Reis Figueiredo (eric_reisfig@poli.ufrj.br)
+c DESCRIPTION: Graph used for testing
+p edge 3 3
+e 1 2
+e 2 3
+e 3 1
