@@ -296,6 +296,7 @@ func bab(g Graph, v int, x []int, k int) {
 		if canColor(g, v, c, x) {
 			// fmt.Println(x)
 			l := lowerLimit(g, x, k)
+			// fmt.Println(kMin)
 			if l >= kMin {
 				branchedSolutions++
 				continue
@@ -353,6 +354,29 @@ func runBab(g Graph) {
 
 	U = g.V
 	L = 0
+	bab(g, 0, deepcopy(x), 0)
+
+	elapsed := time.Since(start)
+
+	fmt.Printf("sol=%v min=%d\n", sol, kMin)
+	fmt.Printf("exploredSolutions=%d\n", exploredSolutions)
+	fmt.Printf("branchedSolutions=%d\n", branchedSolutions)
+	fmt.Printf("branch and bound took %s", elapsed)
+}
+
+func runBabPlus(g Graph) {
+	sol = make([]int, g.V)
+	x := make([]int, g.V)
+
+	start := time.Now()
+
+	U = g.V
+	L = 0
+	kMin, sol = upperLimit(g, x, 0)
+	// kMin, x = upperLimit(g, x, 0)
+	// sol = x
+	fmt.Println(kMin)
+	// fmt.Println(x)
 	bab(g, 0, deepcopy(x), 0)
 
 	elapsed := time.Since(start)
@@ -441,7 +465,8 @@ func runHeuristic(g Graph) {
 
 	elapsed := time.Since(start)
 
-	fmt.Printf("sol=%v k=%d\n", x, k)
+	fmt.Printf("sol=%v\n", x)
+	fmt.Printf("k=%d\n", k)
 	fmt.Printf("greedy took %s", elapsed)
 }
 
@@ -453,7 +478,8 @@ func runHeuristicPlus(g Graph) {
 
 	elapsed := time.Since(start)
 
-	fmt.Printf("sol=%v k=%d\n", x, k)
+	fmt.Printf("sol=%v\n", x)
+	fmt.Printf("k=%d\n", k)
 	fmt.Printf("greedy+ took %s", elapsed)
 }
 
@@ -494,7 +520,11 @@ func runMeta(g Graph) {
 	start := time.Now()
 
 	maxIt := int(1e6)
-	concurrencyLevel := int(1e3)
+	minRandomFactor := 5
+	maxRandomFactor := int(float64(g.V) * 0.01)
+	randomFactor := max(minRandomFactor, maxRandomFactor)
+	maxItPerRandomFactor := maxIt / randomFactor
+	concurrencyLevel := int(8)
 
 	ch := make(chan *Result)
 
@@ -510,13 +540,15 @@ func runMeta(g Graph) {
 				sol = result.x
 				fmt.Printf("k=%d in %s (%d iterations)\n", result.k, result.elapsed, it)
 			}
-			if it%1000 == 0 {
+			if it%100000 == 0 {
 				fmt.Printf("Executed %d iterations\n", it)
 			}
 			it++
 		}
 	}(ch, &resultsWg)
 
+	currRandomFactor := 1
+	fmt.Printf("Using initial random factor: %d\n", currRandomFactor)
 	for i := 0; i < maxIt; i += concurrencyLevel {
 		var wg sync.WaitGroup
 		wg.Add(concurrencyLevel)
@@ -524,7 +556,7 @@ func runMeta(g Graph) {
 			go func(start time.Time, ch chan<- *Result, wg *sync.WaitGroup) {
 				defer wg.Done()
 
-				x := meta(g, 1)
+				x := meta(g, min(currRandomFactor, randomFactor))
 				k := len(count(x))
 
 				ch <- &Result{
@@ -535,6 +567,10 @@ func runMeta(g Graph) {
 			}(start, ch, &wg)
 		}
 		wg.Wait()
+		if i%maxItPerRandomFactor == 0 {
+			currRandomFactor++
+			fmt.Printf("Incrementing current random factor. Using: %d\n", min(currRandomFactor, randomFactor))
+		}
 	}
 
 	close(ch)
@@ -570,6 +606,9 @@ func main() {
 		break
 	case "bab":
 		runBab(g)
+		break
+	case "bab+":
+		runBabPlus(g)
 		break
 	case "heuristic":
 		runHeuristic(g)

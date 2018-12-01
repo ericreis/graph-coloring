@@ -1,0 +1,19 @@
+Using initial random factor: 1
+k=4 in 129.024µs (1 iterations)
+Incrementing current random factor. Using: 2
+Executed 100000 iterations
+Executed 200000 iterations
+Incrementing current random factor. Using: 3
+Executed 300000 iterations
+Executed 400000 iterations
+Incrementing current random factor. Using: 4
+Executed 500000 iterations
+Executed 600000 iterations
+Incrementing current random factor. Using: 5
+Executed 700000 iterations
+Executed 800000 iterations
+Incrementing current random factor. Using: 5
+Executed 900000 iterations
+Executed 1000000 iterations
+sol=[1 2 1 2 3 2 4 2 3 3 2 3 4 3 3 1 1 1 1 1 1 1 2 2 2 2 2 2 2 3 3 3 3 3 3 3 1] k=4
+meta runned for 17.488697585s
